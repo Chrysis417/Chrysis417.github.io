@@ -43,7 +43,7 @@ ga_domain: yoursite
 
 # Sidebar settings
 sidebar: true                      # whether or not using Sidebar.
-sidebar-about-description: "Welcome, I'm Chrysis!\nBUPT-SE-2019"
+sidebar-about-description:    "Welcome to my blog! I'm Chrysis, student of BUPT-SE-2019"
 sidebar-avatar: img/ava.gif      # use absolute URL, seeing it's used in both `/` and `/about/`
 widgets:
 - search
@@ -176,10 +176,10 @@ share: true
 comment:
   gitment:
     enable: false
-    owner:
-    repo:
-    client_id:
-    client_secret:
+    owner: Chrysis417
+    repo: https://github.com/Chrysis417/Chrysis417.github.io.git
+    client_id: d84402e788cf08e4c066
+    client_secret: 0e368b9637f526c6360ac50e28865f44d3cf8a09
   livere:
     enable: false
   disqus:
