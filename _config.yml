@@ -177,7 +177,7 @@ comment:
   gitment:
     enable: true
     owner: Chrysis417
-    repo: https://github.com/Chrysis417/Chrysis417.github.io.git
+    repo: https://chrysis417.github.io/
     client_id: d84402e788cf08e4c066
     client_secret: 0e368b9637f526c6360ac50e28865f44d3cf8a09
   livere:
