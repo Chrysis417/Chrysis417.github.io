@@ -175,7 +175,7 @@ share: true
 ## gitment url: https://github.com/imsun/gitment
 comment:
   gitment:
-    enable: false
+    enable: true
     owner: Chrysis417
     repo: https://github.com/Chrysis417/Chrysis417.github.io.git
     client_id: d84402e788cf08e4c066
