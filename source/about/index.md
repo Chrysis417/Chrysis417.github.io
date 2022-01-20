@@ -12,3 +12,9 @@ comments: true
 > 用于记录学习过程中遇到的各式问题
 > &nbsp;
 > Don't think too much, just do it now.
+
+联系方式：
+
+QQ：943837838
+
+邮箱: 943837838@qq.com / 2019212038@bupt.edu.cn
