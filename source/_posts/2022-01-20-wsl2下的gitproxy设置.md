@@ -1,8 +1,13 @@
 ---
+header-img: "img/bg6.png"
 layout: post
 title: wsl2下的gitproxy设置
 date: 2022-01-20 12:10:25
-tags: wsl2, git, windows
+tags: 
+- wsl2
+- git
+- windows
+
 ---
 # Contents
 首先在powershell下使用命令
