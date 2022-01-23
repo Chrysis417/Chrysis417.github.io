@@ -1,21 +1,28 @@
 ---
-header-img: "b6.png"
-layout: post
 title: wsl2下的gitproxy设置
 catalog: true
-date: 2022-01-20 12:10:25
-tags: 
+comments: true
+indexing: true
+header-img: ../../../../img/default.jpg
+top: false
+date: 2022-01-19 15:19:08
+subtitle:
+tags:
 - wsl2
 - git
 - windows
-
+categories:
+- 环境配置
 ---
 # Contents
+众所周知，由于github服务器架设在国外，大陆用户访问以及使用git操作较为困难。本文提供windows下linux子系统wsl2的git proxy设置方法
+
+
 首先在powershell下使用命令
 ~~~
 wsl -l -v
 ~~~
-查看当前wsl版本。本文适用于wsl2
+查看当前wsl版本。本文适用于wsl2。
 
 由于wsl2一些实现上的原因，在开机的时候会随机分配一个ip地址，所以在wsl2上配置git proxy不能使用以下命令，而要将其中的本机地址127.0.0.1设置为wsl2的ip地址
 ~~~
