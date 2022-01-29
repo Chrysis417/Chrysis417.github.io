@@ -15,7 +15,9 @@ categories:
 - 环境配置
 ---
 # Contents
-众所周知，由于github服务器架设在国外，大陆用户访问以及使用git操作较为困难。本文提供windows下linux子系统wsl2的git proxy设置方法
+众所周知，由于github服务器架设在国外，大陆用户访问以及使用git操作较为困难。本文提供windows下linux子系统wsl2的git proxy设置方法，加速使用代理访问github
+
+萌新时期一个git clone能复制半年确实非常劝退
 
 
 首先在powershell下使用命令
@@ -48,6 +50,16 @@ git config --global https.proxy "http://$host_ip:$http_port"
 
 其中http_port根据自己的梯子来设置，我的http port是10809，有的可能是1080
 
+如果失效，尝试使用export引入环境变量
+
+set_proxy1.sh
+~~~
+host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
+http_port="10809"
+export http_proxy="http://$host_ip:$http_port"
+export https_proxy="http://$host_ip:$http_port"
+~~~
+
 完成后可以在wsl2中输入
 ~~~
 curl google.com
@@ -61,4 +73,5 @@ curl google.com
 > &nbsp;
 > (如果是win10)系统搜索“允许应用通过windows防火墙”,给梯子以及相关应用的局域网(专用网络)访问权限。当然最前面那个勾也打上
 
-
+# 总结与反思
+问技术问题一定要把运行环境以及自己所做过的操作写出来。
