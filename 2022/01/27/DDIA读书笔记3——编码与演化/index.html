@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Chrysis&#39; Blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ava.gif">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          DDIA读书笔记3——编码与演化 - Chrysis&#39; Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/01/27/DDIA读书笔记3——编码与演化/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-dark.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-dark.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#DDIA" title="DDIA">DDIA</a>
+                            
+                              <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                            
+                        </div>
+                        <h1>DDIA读书笔记3——编码与演化</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Chrysis on
+                            2022-01-27
+                        </span>
+
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-dark.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-dark.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Chrysis&#39; blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h1><p>将数据写入文件或发送至不共享内存的另一个进程时,由于没有内存、指针等结构来描述数据,需要建立一套编码协议来进行数据传送.例如XML,json，csv等</p>
+<h2 id="二进制编码"><a href="#二进制编码" class="headerlink" title="二进制编码"></a>二进制编码</h2><p>语言内置的编码库存在以下问题：</p>
+<blockquote>
+<p>与特定编程语言绑定，不够灵活</p>
+<p>要求解码过程能够实例化任意的类，导致安全问题</p>
+<p>向前向后兼容问题</p>
+<p>效率低下</p>
+</blockquote>
+<p>因此开发出了一些通用编码格式，xml json等</p>
+<p>对于计算机，效率最高，开销最小的编码是二进制编码</p>
+<p>以下是一些与json等价的二进制编码算法</p>
+<h3 id="MessagePack"><a href="#MessagePack" class="headerlink" title="MessagePack"></a>MessagePack</h3><p>使用1个字节来标识类型与长度。例如用a8(16进制)表示<strong>长度为8</strong>的<strong>字符串</strong>，83(16进制)表示<strong>3个条目</strong>的<strong>对象</strong></p>
+<p>保留了json模式中的所有信息，将数据转换成十六进制并加上类型与长度描述</p>
+<h3 id="Thrift-与-Protocol-Buffer"><a href="#Thrift-与-Protocol-Buffer" class="headerlink" title="Thrift 与 Protocol Buffer"></a>Thrift 与 Protocol Buffer</h3><p>在MessagePack的基础上，用一个数字来标识条目的名称，而不再把名称本身也作为数据进行编码</p>
+<h3 id="Avro"><a href="#Avro" class="headerlink" title="Avro"></a>Avro</h3><p>编码上，Avro继续从上述编码算法改进，取消了标识条目名称，只编码数据的长度，以及两种数据类型array,union</p>
+<p>array就是若干个相同类型的数据，union用于标识该字段属于的类型，不属于这两种类型的只用一个字节来标识长度。</p>
+<p>那么如何在不传送条目名称、标记的情况下来读写数据呢？Avro提出了读模式和写模式，压缩编码长度的同时解决向前向后兼容问题</p>
+<h4 id="读模式与写模式"><a href="#读模式与写模式" class="headerlink" title="读模式与写模式"></a>读模式与写模式</h4><p>当应用程序使用Avro解码编码数据时，通信双方首先确定读模式与写模式的版本，在接下来的通信生命周期内就使用该版本的读模式与写模式通信</p>
+<p>写模式规定了发送方按什么顺序编码待发送数据，读模式规定接收方按什么顺序从将接受到的数据填入对象的各个属性。读写模式会通过解析字段名匹配字段。</p>
+<p>读写模式可以是不同的版本，只需注意兼容问题</p>
+<p>模式可以存在本地数据库中，通过版本号来读取模式本身</p>
+<p>为保持兼容性，只能添加或删除具有默认值的字段：</p>
+<blockquote>
+<p>读模式读到不认识的字段，直接忽略；</p>
+<p>读模式发现接受到的数据中缺少某些字段的数据，填入默认值；</p>
+</blockquote>
+<p>使用读模式写模式容易更新数据库模式，假如使用Thrift或Protocol buffer,可能需要重新分配字段标签。</p>
+<h2 id="数据流模式"><a href="#数据流模式" class="headerlink" title="数据流模式"></a>数据流模式</h2><p>使用上述的编码方法，将数据从一个进程传递到另一个进程</p>
+<h3 id="基于数据库"><a href="#基于数据库" class="headerlink" title="基于数据库"></a>基于数据库</h3><p>数据库经常遇见新代码写入，旧代码读取的问题，因此也需要向前向后兼容</p>
+<h4 id="归档存储"><a href="#归档存储" class="headerlink" title="归档存储"></a>归档存储</h4><p>定时为数据库创建快照，用于备份或加载到数据仓库。</p>
+<h3 id="基于服务调用"><a href="#基于服务调用" class="headerlink" title="基于服务调用"></a>基于服务调用</h3><p>服务器通过网络公开API，客户端连接到服务器以发出请求的过程就是基于服务调用的数据流</p>
+<p>API预先确定了输入和输出</p>
+<h4 id="面向服务的体系结构SOA-微服务体系结构"><a href="#面向服务的体系结构SOA-微服务体系结构" class="headerlink" title="面向服务的体系结构SOA/微服务体系结构"></a>面向服务的体系结构SOA/微服务体系结构</h4><p>一个服务需要另一个服务的数据或功能时，可以向另一个服务发出请求。这就是被称作SOA的应用程序构建方式</p>
+<p>一个需要达成的目标是使服务可独立部署和演化，新旧版本的服务器和客户端同时运行。因此API的数据编码格式需要注意</p>
+<h4 id="Web服务"><a href="#Web服务" class="headerlink" title="Web服务"></a>Web服务</h4><h5 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h5><p>REST是一个基于HTTP的设计理念</p>
+<p>使用URL来标识资源，使用HTTP协议进行缓存控制，身份验证等</p>
+<h5 id="SOAP"><a href="#SOAP" class="headerlink" title="SOAP"></a>SOAP</h5><p>SOAP是基于XML的协议，目的是独立于HTTP</p>
+<p>SOAP的API使用WSDL(一种基于XML的语言)来描述</p>
+<h3 id="远程过程调用RPC"><a href="#远程过程调用RPC" class="headerlink" title="远程过程调用RPC"></a>远程过程调用RPC</h3><p>网络请求与本地函数的调用是相当不同的：</p>
+<blockquote>
+<p>网络请求是不可预测的，很可能丢包或失败，而本地函数调用具有可掌控性</p>
+<p>网络请求的响应速度是不可预测的</p>
+<p>网络请求无法使用指针等参数描述数据</p>
+<p>客户端和服务可以使用不同的编程语言实现，导致数据类型的转换问题</p>
+</blockquote>
+<h3 id="异步消息传递-消息队列"><a href="#异步消息传递-消息队列" class="headerlink" title="异步消息传递 消息队列"></a>异步消息传递 消息队列</h3><p>在消息在进程之间传递的过程中，引入称为消息代理(或消息队列)的中间件的中介，该中介暂存消息</p>
+<p>具有以下优势</p>
+<blockquote>
+<p>充当缓冲区，当接收方过载或不可用时缓冲消息</p>
+<p>自动重发消息到崩溃的进程，防止信息丢失</p>
+<p>避免通信双方需要知道对方的ip地址和port</p>
+<p>可以将一条消息发给多个接收方</p>
+<p>在逻辑上分离发送方和接收方</p>
+</blockquote>
+<p>消息队列中的消息只包含一些元数据和字节序列，可以使用任何编码格式</p>
+<h4 id="分布式Actor框架"><a href="#分布式Actor框架" class="headerlink" title="分布式Actor框架"></a>分布式Actor框架</h4><p>每个Actor实例代表一个客户端或实体，不关心每个Actor具体在哪个进程上</p>
+<p>每个Actor使用相同的消息传递机制，不保证消息传送成功</p>
+<p>每个Actor一次只处理一条消息</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/01/29/DDIA读书笔记4——分布式系统数据复制/" data-toggle="tooltip" data-placement="top" title="DDIA读书笔记4——分布式系统数据复制">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/01/24/经典同步问题/" data-toggle="tooltip" data-placement="top" title="经典同步问题">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <hr>
+                <div id="blog_comments"></div>
+
+<!--
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+-->
+<!--
+<link rel="stylesheet" href="/css/gitment.css">
+<script type="text/javascript" src="/js/gitment.js"></script>
+-->
+
+<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+
+<!--
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+-->
+
+<script>
+const myTheme = {
+  render(state, instance) {
+    const container = document.createElement('div')
+    container.lang = "en-US"
+    container.className = 'gitment-container gitment-root-container'
+    
+     // your custom component
+    container.appendChild(instance.renderSomething(state, instance))
+    
+    container.appendChild(instance.renderHeader(state, instance))
+    container.appendChild(instance.renderComments(state, instance))
+    container.appendChild(instance.renderEditor(state, instance))
+    //container.appendChild(instance.renderFooter(state, instance))
+    return container
+  },
+  renderSomething(state, instance) {
+    const container = document.createElement('div')
+    container.lang = "en-US"
+    container.className = 'hello_visitor'
+    if (state.user.login) {
+      container.innerText = `Hello ${state.user.login}, Welcome to comment system`
+    }
+    return container
+  }
+}
+
+
+const gitment = new Gitment({
+    id: 'Thu Jan 27 2022 10:35:42 GMT+0800', // optional
+    owner: "Chrysis417",
+    repo: "Chrysis417.github.io",
+    oauth: {
+      client_id: "4bd76409475aac4dbed4",
+      client_secret: "4cedd48bb9783b908ccc80b473f08b56ce7b2aa6",
+    },
+    theme: myTheme,
+    // ...
+    // For more available options, check out the documentation below
+  })
+  
+  gitment.render('blog_comments')
+  // or
+  // gitment.render(document.getElementById('comments'))
+  // or
+  // document.body.appendChild(gitment.render())
+</script>
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#编码"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">编码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二进制编码"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">二进制编码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MessagePack"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">MessagePack</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Thrift-与-Protocol-Buffer"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">Thrift 与 Protocol Buffer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Avro"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">Avro</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#读模式与写模式"><span class="toc-nav-number">1.1.3.1.</span> <span class="toc-nav-text">读模式与写模式</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据流模式"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">数据流模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#基于数据库"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">基于数据库</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#归档存储"><span class="toc-nav-number">1.2.1.1.</span> <span class="toc-nav-text">归档存储</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#基于服务调用"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">基于服务调用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#面向服务的体系结构SOA-微服务体系结构"><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">面向服务的体系结构SOA&#x2F;微服务体系结构</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Web服务"><span class="toc-nav-number">1.2.2.2.</span> <span class="toc-nav-text">Web服务</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#REST"><span class="toc-nav-number">1.2.2.2.1.</span> <span class="toc-nav-text">REST</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#SOAP"><span class="toc-nav-number">1.2.2.2.2.</span> <span class="toc-nav-text">SOAP</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#远程过程调用RPC"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">远程过程调用RPC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#异步消息传递-消息队列"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">异步消息传递 消息队列</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#分布式Actor框架"><span class="toc-nav-number">1.2.4.1.</span> <span class="toc-nav-text">分布式Actor框架</span></a></li></ol></li></ol></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#DDIA" title="DDIA">DDIA</a>
+                        
+                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/Chrysis417" target="_blank">Chrysis&#39;s Github</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Chrysis417">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chrysis 2022 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>

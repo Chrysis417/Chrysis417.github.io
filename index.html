@@ -243,6 +243,12 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -251,25 +257,41 @@
 
         <div class="post-preview">
 
-            <a href="/2022/01/16/t1/">
+            <a href="/2022/01/29/DDIA读书笔记4——分布式系统数据复制/">
                 <h2 class="post-title">
-                    t1
+                    DDIA读书笔记4——分布式系统数据复制
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    multiple terminal test...
+                    Chapter5.数据复制
+
+本笔记中库和节点两个词可能交替使用，含义等价
+
+分布式数据系统特征
+扩展性：分散读写吞吐或存储的负载
+对单台机器提高性能称为垂直扩展。但是成本并非随性能线性增长，往往性能增加一倍成本增加好几倍
+
+
+
+
+水平扩展就是一般意义上的分布式架构 
+
+容错性：提供容错冗余，一台机器出错后冗余组件可迅速接管
+降低延迟：在地理位置相距较大的不同地区部署服务，以方便用户访问最近......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Chrysis on
-                    2022-01-16
+                    2022-01-29
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#t1" title="t1">t1</a>
+                      <a href="/tags/#DDIA" title="DDIA">DDIA</a>
+                    
+                      <a href="/tags/#数据库" title="数据库">数据库</a>
                     
                 </div>
             
@@ -283,26 +305,36 @@
 
         <div class="post-preview">
 
-            <a href="/2022/01/16/test1/">
+            <a href="/2022/01/27/DDIA读书笔记3——编码与演化/">
                 <h2 class="post-title">
-                    test1
+                    DDIA读书笔记3——编码与演化
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    上传测试111
-...
+                    编码将数据写入文件或发送至不共享内存的另一个进程时,由于没有内存、指针等结构来描述数据,需要建立一套编码协议来进行数据传送.例如XML,json，csv等
+二进制编码语言内置的编码库存在以下问题：
+
+与特定编程语言绑定，不够灵活
+要求解码过程能够实例化任意的类，导致安全问题
+向前向后兼容问题
+效率低下
+
+因此开发出了一些通用编码格式，xml json等
+对于计算机，效率最高，开销最小的编码是......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Chrysis on
-                    2022-01-16
+                    2022-01-27
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#test，test1z" title="test，test1z">test，test1z</a>
+                      <a href="/tags/#DDIA" title="DDIA">DDIA</a>
+                    
+                      <a href="/tags/#数据库" title="数据库">数据库</a>
                     
                 </div>
             
@@ -316,25 +348,29 @@
 
         <div class="post-preview">
 
-            <a href="/2022/01/11/hexo/">
+            <a href="/2022/01/24/经典同步问题/">
                 <h2 class="post-title">
-                    hexo
+                    经典同步问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    IPC同步不同进程(或线程)访问同一个内存区域(临界区)时，会引发一些同步问题，如竞争条件
+信号量互斥量——互斥锁与条件变量123456&#x2F;* 生产者-消费者问题 *&#x2F;#inlcude&lt;stdio.h&gt;#include&lt;pthread.h&gt;pthread_mutex_t mutex;pthread_cond_t condc,dondp;
+管程哲学家就......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Chrysis on
-                    2022-01-11
+                    2022-01-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#hexo-theme-snail" title="hexo-theme-snail">hexo-theme-snail</a>
+                      <a href="/tags/#数据库" title="数据库">数据库</a>
+                    
+                      <a href="/tags/#操作系统" title="操作系统">操作系统</a>
                     
                 </div>
             
@@ -348,28 +384,148 @@
 
         <div class="post-preview">
 
-            <a href="/2019/11/01/Hexo-Theme-Snail/">
+            <a href="/2022/01/24/DDIA读书笔记2——存储与检索/">
                 <h2 class="post-title">
-                    Hexo-Theme-Snail
+                    DDIA读书笔记2——存储与检索
                 </h2>
                 <h3 class="post-subtitle">
-                    A succinct hexo theme.
+                    
                 </h3>
                 <div class="post-content-preview">
-                    hexo-theme-snailView Hexo-Theme-Snail Sources On Github &#10174; 
-View Live Super Snail Blog &#10174;
-
-Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, that can be set ......
+                    Chapter3.数据存储与检索
+索引索引是一种冗余存储，是用于加快数据查询的元数据，在加快查询的同时会提高写入开销。
+哈希索引简单的哈希过程，key为查询的关键字，如url，value为值或值所在的地址
+一个视频的播放量就可以存储为key：视频url；value：播放量
+使用哈希索引日志文件以键值对作为日志
+日志文件使用顺序追加是合适的，因为：从磁盘角度，顺序写入比随机写入快的多；并发和崩......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Chrysis on
-                    2019-11-01
+                    2022-01-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#hexo-theme-snail" title="hexo-theme-snail">hexo-theme-snail</a>
+                      <a href="/tags/#DDIA" title="DDIA">DDIA</a>
+                    
+                      <a href="/tags/#数据库" title="数据库">数据库</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/01/23/DDIA读书笔记1/">
+                <h2 class="post-title">
+                    DDIA读书笔记1——数据模型与查询语言
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Chapter2.数据模型与查询语言数据模型NoSQL即”非sql”
+关系模型目前最常用的数据库模型，将数据存储为表
+面临的问题：目前大多数应用开发采用面向对象的编程语言，而编程语言对象与关系模型表之间的转换非常麻烦
+文档模型适用于记录之间有一对多关系或没有关系
+类似于json的模型，将数据存储为树结构
+一对多关系就形成了树结构，例如简历上一个人有多份工作，多个教育经历
+面临的问题：应用程序......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Chrysis on
+                    2022-01-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DDIA" title="DDIA">DDIA</a>
+                    
+                      <a href="/tags/#数据库" title="数据库">数据库</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/01/22/linux线程与信号初探/">
+                <h2 class="post-title">
+                    linux线程信号与socket初探 --记计网实验udp实现tcp
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    背景计网课程实验：使用udp实现tcp。实验要求非常之宽泛，基本上就这一句，（高情商）给同学们提供了广阔的发挥空间，（低情商）也非常好水过 ╮(╯▽╰)╭
+考虑到期末ddl集中以及个人知识储备，选择模拟tcp的超时重发。
+从看懂老师发的参考代码到自己写出来还是花了有一点时间的，深刻认识到自己编码能力之弱鸡。但还是有必要记录一下用到的技术。
+高精度计时微秒级/秒级123456789101112......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Chrysis on
+                    2022-01-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#linux" title="linux">linux</a>
+                    
+                      <a href="/tags/#c++" title="c++">c++</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/01/19/wsl2下的gitproxy设置/">
+                <h2 class="post-title">
+                    wsl2下的gitproxy设置
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Contents众所周知，由于github服务器架设在国外，大陆用户访问以及使用git操作较为困难。本文提供windows下linux子系统wsl2的git proxy设置方法，加速使用代理访问github
+萌新时期一个git clone能复制半年确实非常劝退
+首先在powershell下使用命令1wsl -l -v查看当前wsl版本。本文适用于wsl2。
+由于wsl2一些实现上的原因，在开......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Chrysis on
+                    2022-01-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#wsl2" title="wsl2">wsl2</a>
+                    
+                      <a href="/tags/#git" title="git">git</a>
+                    
+                      <a href="/tags/#windows" title="windows">windows</a>
                     
                 </div>
             
@@ -432,9 +588,21 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
     <div class="tags">
         
             
-            <a href="/tags/#hexo-theme-snail" title="hexo-theme-snail" rel="2">hexo-theme-snail</a>
+        
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#DDIA" title="DDIA" rel="4">DDIA</a>
+            
+        
+            
+            <a href="/tags/#数据库" title="数据库" rel="5">数据库</a>
             
         
             
@@ -454,8 +622,7 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
         
 
         
-            <p>Welcome, I&#39;m Chrysis!
-BUPT-SE-2019</p>
+            <p>Welcome to my blog! I&#39;m Chrysis, student of BUPT-SE-2019</p>
         
 
         <!-- SNS Link -->
@@ -509,19 +676,23 @@ BUPT-SE-2019</p>
     <ul>
       
         <li>
-          <a href="/2022/01/16/t1/">t1</a>
+          <a href="/2022/01/29/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B04%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6/">DDIA读书笔记4——分布式系统数据复制</a>
         </li>
       
         <li>
-          <a href="/2022/01/16/test1/">test1</a>
+          <a href="/2022/01/27/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E7%BC%96%E7%A0%81%E4%B8%8E%E6%BC%94%E5%8C%96/">DDIA读书笔记3——编码与演化</a>
         </li>
       
         <li>
-          <a href="/2022/01/11/hexo/">hexo</a>
+          <a href="/2022/01/24/%E7%BB%8F%E5%85%B8%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/">经典同步问题</a>
         </li>
       
         <li>
-          <a href="/2019/11/01/Hexo-Theme-Snail/">Hexo-Theme-Snail</a>
+          <a href="/2022/01/24/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E5%AD%98%E5%82%A8%E4%B8%8E%E6%A3%80%E7%B4%A2/">DDIA读书笔记2——存储与检索</a>
+        </li>
+      
+        <li>
+          <a href="/2022/01/23/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B01/">DDIA读书笔记1——数据模型与查询语言</a>
         </li>
       
     </ul>
@@ -544,7 +715,7 @@ BUPT-SE-2019</p>
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">7</span></li></ul>
     </div>
 
         <hr>
@@ -555,7 +726,13 @@ BUPT-SE-2019</p>
     <div class="widget">
       <ul>
         
-          <a href="categories/#hexo"><li>hexo</li></a>
+          <a href="categories/#linux"><li>linux</li></a>
+        
+          <a href="categories/#环境配置"><li>环境配置</li></a>
+        
+          <a href="categories/#读书笔记"><li>读书笔记</li></a>
+        
+          <a href="categories/#数据库"><li>数据库</li></a>
         
       </ul>
     </div>

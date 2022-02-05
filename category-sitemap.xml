@@ -8,8 +8,29 @@
     </url>
 
     <url>
-        <loc>https://dusign.net/categories/hexo/</loc>
-        <lastmod>2022-01-15T08:24:05.428Z</lastmod>
+        <loc>https://dusign.net/categories/%25E8%25AF%25BB%25E4%25B9%25A6%25E7%25AC%2594%25E8%25AE%25B0/%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593/</loc>
+        <lastmod>2022-02-05T07:38:59.535Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/categories/%25E8%25AF%25BB%25E4%25B9%25A6%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+        <lastmod>2022-02-05T07:38:59.535Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/categories/linux/</loc>
+        <lastmod>2022-01-29T08:25:55.623Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/categories/%25E7%258E%25AF%25E5%25A2%2583%25E9%2585%258D%25E7%25BD%25AE/</loc>
+        <lastmod>2022-01-29T08:25:55.383Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

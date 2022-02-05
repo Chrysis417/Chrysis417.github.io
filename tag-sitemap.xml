@@ -3,22 +3,57 @@
 
 
     <url>
-        <loc>https://dusign.net/tags/t1/</loc>
-        <lastmod>2022-01-16T13:31:04.714Z</lastmod>
+        <loc>https://dusign.net/tags/%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593/</loc>
+        <lastmod>2022-02-05T07:38:59.535Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://dusign.net/tags/test%25EF%25BC%258Ctest1z/</loc>
-        <lastmod>2022-01-16T04:20:30.039Z</lastmod>
+        <loc>https://dusign.net/tags/DDIA/</loc>
+        <lastmod>2022-02-05T07:38:59.535Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://dusign.net/tags/hexo-theme-snail/</loc>
-        <lastmod>2022-01-15T08:24:05.428Z</lastmod>
+        <loc>https://dusign.net/tags/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F/</loc>
+        <lastmod>2022-02-02T13:14:51.402Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/tags/c/</loc>
+        <lastmod>2022-01-29T08:25:55.623Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/tags/linux/</loc>
+        <lastmod>2022-01-29T08:25:55.623Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/tags/windows/</loc>
+        <lastmod>2022-01-29T08:25:55.383Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/tags/git/</loc>
+        <lastmod>2022-01-29T08:25:55.383Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://dusign.net/tags/wsl2/</loc>
+        <lastmod>2022-01-29T08:25:55.383Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

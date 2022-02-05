@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          About - Chrysis&#39; Blog
+          经典同步问题 - Chrysis&#39; Blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/about/">
+    <link rel="canonical" href="https://dusign.net/2022/01/24/经典同步问题/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -85,8 +85,8 @@
     header.intro-header{
         
             
-                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/img/header_img/about-bg.png')
-                /*page*/
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../../../img/default.jpg')
+                /*post*/
             
         
     }
@@ -100,10 +100,23 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span id="subdusi" class="subheading"></span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                            
+                              <a class="tag" href="/tags/#操作系统" title="操作系统">操作系统</a>
+                            
+                        </div>
+                        <h1>经典同步问题</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Chrysis on
+                            2022-01-24
+                        </span>
+
+                        
+
                     </div>
                 
 
@@ -220,225 +233,231 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-    <!-- Post Container -->
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-                <blockquote>
-<p>一个普通BUPT软工专业学生个人博客<br>&nbsp;<br>用于记录学习过程中遇到的各式问题<br>&nbsp;<br>Don’t think too much, just do it now.</p>
-</blockquote>
-<p>联系方式：</p>
-<p>QQ：943837838</p>
-<p>邮箱: 943837838@qq.com / 2019212038@bupt.edu.cn</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-            </div>
+                <h1 id="IPC同步"><a href="#IPC同步" class="headerlink" title="IPC同步"></a>IPC同步</h1><p>不同进程(或线程)访问同一个内存区域(临界区)时，会引发一些同步问题，如竞争条件</p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><h2 id="互斥量——互斥锁与条件变量"><a href="#互斥量——互斥锁与条件变量" class="headerlink" title="互斥量——互斥锁与条件变量"></a>互斥量——互斥锁与条件变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 生产者-消费者问题 *&#x2F;</span><br><span class="line">#inlcude&lt;stdio.h&gt;</span><br><span class="line">#include&lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">pthread_mutex_t mutex;</span><br><span class="line">pthread_cond_t condc,dondp;</span><br></pre></td></tr></table></figure>
+<h2 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h2><h2 id="哲学家就餐问题与读者-写者问题"><a href="#哲学家就餐问题与读者-写者问题" class="headerlink" title="哲学家就餐问题与读者-写者问题"></a>哲学家就餐问题与读者-写者问题</h2><h1 id="数据库读写同步"><a href="#数据库读写同步" class="headerlink" title="数据库读写同步"></a>数据库读写同步</h1>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/01/27/DDIA读书笔记3——编码与演化/" data-toggle="tooltip" data-placement="top" title="DDIA读书笔记3——编码与演化">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/01/24/DDIA读书笔记2——存储与检索/" data-toggle="tooltip" data-placement="top" title="DDIA读书笔记2——存储与检索">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
 
-            <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        
+                <!-- tip start -->
+                
+
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <hr>
+                <div id="blog_comments"></div>
+
 <!--
-<h5>SEARCH</h5>
-<div class="search-article" class="tags">
-	<input id="search-kw" type="text" name="search_article" placeholder="Enter keywords for search" />
-	<div class="search-img">
-		<img 
-			src="/img/search.png" 
-			alt="search" 
-			onMouseOver="this.src='/img/search-focus.png'" 
-			onMouseOut="this.src='/img/search.png'"/>
-	</div>
-</div>-->
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+-->
+<!--
+<link rel="stylesheet" href="/css/gitment.css">
+<script type="text/javascript" src="/js/gitment.js"></script>
+-->
 
-<h5>SEARCH</h5>
-<div id="site_search">
-	<div class="form-group">
-		<input type="text" id="local-search-input" name="q" results="0" placeholder="search" class="st-search-input st-default-search-input form-control"/>
-	</div>  
-	<div id="local-search-result"></div>
-</div>
+<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
 
-        <hr>
+<!--
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+-->
+
+<script>
+const myTheme = {
+  render(state, instance) {
+    const container = document.createElement('div')
+    container.lang = "en-US"
+    container.className = 'gitment-container gitment-root-container'
     
-        <!-- Featured Tags -->
+     // your custom component
+    container.appendChild(instance.renderSomething(state, instance))
+    
+    container.appendChild(instance.renderHeader(state, instance))
+    container.appendChild(instance.renderComments(state, instance))
+    container.appendChild(instance.renderEditor(state, instance))
+    //container.appendChild(instance.renderFooter(state, instance))
+    return container
+  },
+  renderSomething(state, instance) {
+    const container = document.createElement('div')
+    container.lang = "en-US"
+    container.className = 'hello_visitor'
+    if (state.user.login) {
+      container.innerText = `Hello ${state.user.login}, Welcome to comment system`
+    }
+    return container
+  }
+}
 
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
+
+const gitment = new Gitment({
+    id: 'Mon Jan 24 2022 15:02:00 GMT+0800', // optional
+    owner: "Chrysis417",
+    repo: "Chrysis417.github.io",
+    oauth: {
+      client_id: "4bd76409475aac4dbed4",
+      client_secret: "4cedd48bb9783b908ccc80b473f08b56ce7b2aa6",
+    },
+    theme: myTheme,
+    // ...
+    // For more available options, check out the documentation below
+  })
+  
+  gitment.render('blog_comments')
+  // or
+  // gitment.render(document.getElementById('comments'))
+  // or
+  // document.body.appendChild(gitment.render())
+</script>
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
             
-        
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
             
-        
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#IPC同步"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">IPC同步</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#信号量"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">信号量</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#互斥量——互斥锁与条件变量"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">互斥量——互斥锁与条件变量</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#管程"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">管程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#哲学家就餐问题与读者-写者问题"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">哲学家就餐问题与读者-写者问题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#数据库读写同步"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">数据库读写同步</span></a></li></ol>
             
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#DDIA" title="DDIA" rel="4">DDIA</a>
-            
-        
-            
-            <a href="/tags/#数据库" title="数据库" rel="5">数据库</a>
-            
-        
-            
-        
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                        
+                          <a class="tag" href="/tags/#操作系统" title="操作系统">操作系统</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/Chrysis417" target="_blank">Chrysis&#39;s Github</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/ava.gif" />
-        
 
-        
-            <p>Welcome to my blog! I&#39;m Chrysis, student of BUPT-SE-2019</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/Chrysis417">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
 
-            
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-            
-
-            
-
-            
-
-            
-
-            
-
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>VISITORS</h5>
-  <div class="widget">
-    <span>
-    	Viewed <b><i><span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Times
-	</span>
-	<br/>
-	<span>
-		<b><i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Visitors In Total
-	</span>
-  </div>
-
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h5>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2022/01/29/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B04%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6/">DDIA读书笔记4——分布式系统数据复制</a>
-        </li>
-      
-        <li>
-          <a href="/2022/01/27/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B03%E2%80%94%E2%80%94%E7%BC%96%E7%A0%81%E4%B8%8E%E6%BC%94%E5%8C%96/">DDIA读书笔记3——编码与演化</a>
-        </li>
-      
-        <li>
-          <a href="/2022/01/24/%E7%BB%8F%E5%85%B8%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/">经典同步问题</a>
-        </li>
-      
-        <li>
-          <a href="/2022/01/24/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E5%AD%98%E5%82%A8%E4%B8%8E%E6%A3%80%E7%B4%A2/">DDIA读书笔记2——存储与检索</a>
-        </li>
-      
-        <li>
-          <a href="/2022/01/23/DDIA%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B01/">DDIA读书笔记1——数据模型与查询语言</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="https://github.com/Chrysis417" target="_blank">Chrysis&#39;s Github</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">7</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h5>
-    <div class="widget">
-      <ul>
-        
-          <a href="categories/#linux"><li>linux</li></a>
-        
-          <a href="categories/#环境配置"><li>环境配置</li></a>
-        
-          <a href="categories/#读书笔记"><li>读书笔记</li></a>
-        
-          <a href="categories/#数据库"><li>数据库</li></a>
-        
-      </ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
