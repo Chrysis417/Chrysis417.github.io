@@ -357,9 +357,9 @@
                     
                 </h3>
                 <div class="post-content-preview">
-                    IPC同步不同进程(或线程)访问同一个内存区域(临界区)时，会引发一些同步问题，如竞争条件
-信号量互斥量——互斥锁与条件变量123456&#x2F;* 生产者-消费者问题 *&#x2F;#inlcude&lt;stdio.h&gt;#include&lt;pthread.h&gt;pthread_mutex_t mutex;pthread_cond_t condc,dondp;
-管程哲学家就......
+                    多线程、进程同步不同进程(或线程)访问同一个内存区域(临界区)时，会引发一些同步问题，如竞争条件
+信号量定义一个整型变量用于累计唤醒次数,称为信号量
+定义一组操作：up与down，两者均为原子操作1234567891011121314down(semaphore* S)&#123;    S-&gt;value--;&#x2F;&#x2F;申请一个资源    if(S-&gt;value&l......
                 </div>
             </a>
             
