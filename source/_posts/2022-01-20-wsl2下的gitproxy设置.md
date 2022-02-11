@@ -26,7 +26,7 @@ wsl -l -v
 ~~~
 查看当前wsl版本。本文适用于wsl2。
 
-由于wsl2一些实现上的原因，在开机的时候会随机分配一个ip地址，所以在wsl2上配置git proxy不能使用以下命令，而要将其中的本机地址127.0.0.1设置为wsl2的ip地址
+由于wsl2一些实现上的原因，在开机的时候会被随机分配一个ip地址，而非像wsl1直接使用本机ip 127.0.0.1，所以在wsl2上配置git proxy不能使用以下命令，而要将其中的本机地址127.0.0.1设置为wsl2的ip地址
 ~~~
 git config --global https.proxy http://127.0.0.1:1080
 git config --global https.proxy https://127.0.0.1:1080
