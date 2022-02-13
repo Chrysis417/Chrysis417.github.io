@@ -15,7 +15,7 @@ categories:
 - 环境配置
 ---
 # Contents
-众所周知，由于github服务器架设在国外，大陆用户访问以及使用git操作较为困难。本文提供windows下linux子系统wsl2的git proxy设置方法，加速使用代理访问github
+众所周知，由于github服务器架设在国外，大陆用户访问以及使用git操作较为困难。本文提供windows下linux子系统wsl2的git proxy设置方法，使用代理加速访问github
 
 萌新时期一个git clone能复制半年确实非常劝退
 
