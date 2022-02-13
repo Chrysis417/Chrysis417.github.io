@@ -258,7 +258,96 @@
 <h3 id="使用RAII机制管理mutex"><a href="#使用RAII机制管理mutex" class="headerlink" title="使用RAII机制管理mutex"></a>使用RAII机制管理mutex</h3><p>类似于python中的with关键字，用完资源(锁)后自动释放<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">std::mutex m;</span><br><span class="line"> </span><br><span class="line">void bad() </span><br><span class="line">&#123;</span><br><span class="line">    m.lock();                    &#x2F;&#x2F; acquire the mutex</span><br><span class="line">    f();                         &#x2F;&#x2F; if f() throws an exception, the mutex is never released</span><br><span class="line">    if(!everything_ok()) return; &#x2F;&#x2F; early return, the mutex is never released</span><br><span class="line">    m.unlock();                  &#x2F;&#x2F; if bad() reaches this statement, the mutex is released</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void good()</span><br><span class="line">&#123;</span><br><span class="line">    std::lock_guard&lt;std::mutex&gt; lk(m); &#x2F;&#x2F; RAII class: mutex acquisition is initialization</span><br><span class="line">    f();                               &#x2F;&#x2F; if f() throws an exception, the mutex is released</span><br><span class="line">    if(!everything_ok()) return;       &#x2F;&#x2F; early return, the mutex is released</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="异步操作"><a href="#异步操作" class="headerlink" title="异步操作"></a>异步操作</h2><p>异步操作是一种在不需要等待被调用方返回结果之前，就让操作继续进行下去的方法</p>
 <p>future 和 promise 起源于函数式编程，其目的是将值（future）和计算方式（promise）分离，使得 promise 可以异步地修改 future，从而提高代码的可读性，并减少通信延迟</p>
-<h2 id="哲学家就餐问题与读者-写者问题"><a href="#哲学家就餐问题与读者-写者问题" class="headerlink" title="哲学家就餐问题与读者-写者问题"></a>哲学家就餐问题与读者-写者问题</h2><h1 id="数据库读写同步"><a href="#数据库读写同步" class="headerlink" title="数据库读写同步"></a>数据库读写同步</h1><h2 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h2><h2 id="污读"><a href="#污读" class="headerlink" title="污读"></a>污读</h2>
+<h2 id="哲学家就餐问题与读者-写者问题"><a href="#哲学家就餐问题与读者-写者问题" class="headerlink" title="哲学家就餐问题与读者-写者问题"></a>哲学家就餐问题与读者-写者问题</h2><h1 id="数据库读写同步"><a href="#数据库读写同步" class="headerlink" title="数据库读写同步"></a>数据库读写同步</h1><p>参考：<a href="https://juejin.cn/post/6855129007336521741" target="_blank" rel="noopener">https://juejin.cn/post/6855129007336521741</a></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><blockquote>
+<p>丢失更新</p>
+</blockquote>
+<ul>
+<li>多个事务同时对一个变量写，导致竞争条件</li>
+</ul>
+<blockquote>
+<p>未提交依赖 / 污读、写 / Dirty Write Read </p>
+</blockquote>
+<ul>
+<li><p>脏读：事务A读到了另一个事务B未提交的数据，且事后事务B回滚了，导致事务A读到了“不存在”的数据</p>
+</li>
+<li><p>脏写：事务修改了其它事务未提交的数据</p>
+</li>
+</ul>
+<blockquote>
+<p>不一致分析 / 不可重复读</p>
+</blockquote>
+<ul>
+<li><p>一个事务进行数据读取时，两次读取的结果不一致，因为其他事务对数据进行了增、删、改</p>
+</li>
+<li><p>幻读即读到其他事务新增的数据</p>
+</li>
+</ul>
+<p>其中脏写是最严重的问题，必须避免，其他属于不一致读问题</p>
+<h2 id="不一致读问题的解决方法"><a href="#不一致读问题的解决方法" class="headerlink" title="不一致读问题的解决方法"></a>不一致读问题的解决方法</h2><h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><ul>
+<li><p>READ UNCOMMITTED：未提交读。</p>
+</li>
+<li><p>READ COMMITTED：已提交读。</p>
+</li>
+<li><p>REPEATABLE READ：可重复读。</p>
+</li>
+<li><p>SERIALIZABLE：串行化。</p>
+</li>
+</ul>
+<p>这是SQL标准的四种隔离级别，也是innoDB所采用的</p>
+<p>从上到下并发度依次降低，安全度依次提高</p>
+<p>InnoDB默认隔离级别是可重复读，能够防止脏读、不可重复读、污读的问题</p>
+<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>MVCC(Multi Version Concurrency Control)，多版本并发控制，简单来说就是通过维护数据历史版本，从而解决并发访问情况下的读一致性问题。</p>
+<p>在InnoDB中，每行记录实际上都包含了两个隐藏字段：事务id(trx_id)和回滚指针(roll_pointer)</p>
+<p>roll_pointer就是一个单链表，称为版本链，时间顺序上后往前依次指向对该字段的历史版本(这些历史版本就组成了该字段的undo日志)</p>
+<p>InnoDB中事务在进行读操作时，会生成一个称为<strong>ReadView</strong>的数据结构，记录一些当前运行时的数据(主要是事务id)，并通过一些逻辑判断来决定当前读的记录是否对该事务可见。</p>
+<p>若不可见，则顺着undo日志继续往下判断，若走到undo日志尽头这条记录仍然对该事务不可见，则查询结果不包括这条记录</p>
+<p>InnoDB中的四种隔离级别的主要区别就是ReadView的生成时机</p>
+<p>READ UNCOMMITTED直接读取最新记录即可；SERIALIZABLE下事务间通过加锁执行不会有这些并发问题</p>
+<p>READ COMMITTED在每次读取数据前都会生成一个<strong>ReadView</strong>，这样就能保证每次都能读到其它事务已提交的数据。</p>
+<p>REPEATABLE READ 只在第一次读取数据时生成一个<strong>ReadView</strong></p>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>对于某一条记录，多个事务可能进行的引发不一致问题操作有:</p>
+<ol>
+<li><p>写-写<br> 即并发事务同时修改同一行数据记录。这种情况下可能导致脏写问题，这是任何情况下都不允许发生的，因此只能通过加锁实现，也就是当一个事务需要对某行记录进行修改时，首先会先给这条记录加锁，如果加锁成功则继续执行，否则就排队等待，事务执行完成或回滚会自动释放锁。</p>
+</li>
+<li><p>读-写<br> 即一个事务进行读取操作，另一个进行写入操作。这种情况下可能会产生脏读、不可重复读、幻读。最好的方案是读操作利用多版本并发控制（MVCC），写操作进行加锁。</p>
+</li>
+</ol>
+<p>若多个事务同时读，则不会引发问题</p>
+<h4 id="锁的粒度"><a href="#锁的粒度" class="headerlink" title="锁的粒度"></a>锁的粒度</h4><p>粒度指受保护的数据项的大小，如一个表，一页(操作系统层面上的一页)，一行，一个字段</p>
+<p>常用的是表级锁与行级锁</p>
+<p>表级锁锁住整个表，粒度较大，行级锁只锁某一行，粒度较小</p>
+<p>可以理解为当一个节点被加锁时，其所有子节点也被加锁(此条针对S和X锁)</p>
+<h4 id="锁的种类"><a href="#锁的种类" class="headerlink" title="锁的种类"></a>锁的种类</h4><ol>
+<li><p>S共享锁Share lock<br> 一个事务进行读的时候获得一个字段的S锁，一个S锁可以被多个事务获取</p>
+</li>
+<li><p>X互斥锁Exclude lock<br> 一个事务进行写的时候获得一个字段的X锁，一个X锁在同一时刻只能被一个事务获取</p>
+</li>
+</ol>
+<p><strong>对于一条记录，X锁被获取时不能加S锁，S锁被获取时不能加X锁</strong></p>
+<ol>
+<li><p>I意向锁Intension lock<br> 由数据库自己维护，当一个节点被加锁时，其所有父节点也被加上I锁</p>
+<p> 文章已经说的很清楚了，搬运一个</p>
+</li>
+</ol>
+<blockquote>
+<p>意向锁可以认为是S锁和X锁在数据表上的标识，通过意向锁可以快速判断表中是否有记录被上锁，从而避免通过遍历的方式来查看表中有没有记录被上锁，提升加锁效率。例如，我们要加表级别的X锁，这时候数据表里面如果存在行级别的X锁或者S锁的，加锁就会失败，此时直接根据意向锁就能知道这张表是否有行级别的X锁或者S锁。</p>
+</blockquote>
+<h4 id="乐观锁与悲观锁"><a href="#乐观锁与悲观锁" class="headerlink" title="乐观锁与悲观锁"></a>乐观锁与悲观锁</h4><p>乐观锁与悲观锁是一种实现思想，而S/I/X锁是具体的实现机制</p>
+<h5 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h5><p>思想是要修改一个字段须要先上锁。上文介绍的S/X锁就是悲观锁。处理加锁的机制会让数据库产生额外的开销，还有增加产生死锁的机会，还会降低并行性。</p>
+<h5 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h5><p>在读多写少的场景就可以使用乐观锁，乐观锁假设事务之间很少发生冲突，在事务准备提交时进行检验，若确实存在冲突则整个事务回滚。</p>
+<p>乐观锁机制将一个事务T分为2或3个阶段:开始，确认，结束</p>
+<p>开始阶段：从数据库读取需要的值到本地</p>
+<p>确认阶段：对于读操作，检查数据库中字段是否和本地副本吻合；对于写操作，见下文</p>
+<p>结束阶段：对于写操作，把对本地副本执行的写操作反应到数据库中</p>
+<p>分别赋予时间戳start(T),validation(T),finish(T),进行写操作时，必须满足以下两个条件之一</p>
+<ol>
+<li><p>当前事务开始时，没有其他事务在并行执行</p>
+</li>
+<li><p> a. 较早事务写的数据项不是当前事务读取的<br> b. 对前一个事务S，有start(T)&lt;finish(S)&lt;validation(T)</p>
+</li>
+</ol>
+
                 
                 <hr>
                 <!-- Pager -->
@@ -385,7 +474,7 @@ const gitment = new Gitment({
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#多线程、进程同步"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">多线程、进程同步</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#信号量"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">信号量</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#屏障"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">屏障</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#互斥量——互斥锁与条件变量"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">互斥量——互斥锁与条件变量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用RAII机制管理mutex"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">使用RAII机制管理mutex</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#异步操作"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">异步操作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#哲学家就餐问题与读者-写者问题"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">哲学家就餐问题与读者-写者问题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#数据库读写同步"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">数据库读写同步</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#幻读"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">幻读</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#污读"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">污读</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#多线程、进程同步"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">多线程、进程同步</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#信号量"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">信号量</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#屏障"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">屏障</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#互斥量——互斥锁与条件变量"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">互斥量——互斥锁与条件变量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用RAII机制管理mutex"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">使用RAII机制管理mutex</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#异步操作"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">异步操作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#哲学家就餐问题与读者-写者问题"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">哲学家就餐问题与读者-写者问题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#数据库读写同步"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">数据库读写同步</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#常见问题"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">常见问题</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#不一致读问题的解决方法"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">不一致读问题的解决方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#隔离级别"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">隔离级别</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MVCC"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">MVCC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#锁"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">锁</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#锁的粒度"><span class="toc-nav-number">2.2.3.1.</span> <span class="toc-nav-text">锁的粒度</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#锁的种类"><span class="toc-nav-number">2.2.3.2.</span> <span class="toc-nav-text">锁的种类</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#乐观锁与悲观锁"><span class="toc-nav-number">2.2.3.3.</span> <span class="toc-nav-text">乐观锁与悲观锁</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#悲观锁"><span class="toc-nav-number">2.2.3.3.1.</span> <span class="toc-nav-text">悲观锁</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#乐观锁"><span class="toc-nav-number">2.2.3.3.2.</span> <span class="toc-nav-text">乐观锁</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
             
           
           </div>
