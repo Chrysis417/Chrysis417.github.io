@@ -19,7 +19,6 @@ categories:
 
 萌新时期一个git clone能复制半年确实非常劝退
 
-
 首先在powershell下使用命令
 ~~~
 wsl -l -v
